@@ -1,23 +1,35 @@
-import logo from './logo.svg';
+import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import './App.css';
+
+import Login from './pages/Auth/login';
+// import Homepage from './pages/resume_builder/Homepage';
+import PrivateRoute from "./routes/PrivateRoute";
+import Template from './pages/user-resume/Template';
+import LandingPage from './pages/user-resume/Landingpage';
+import AddResume from './pages/user-resume/AddResume';
+import Homepage from './pages/resume_builder/Homepage';
+
+
+
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <BrowserRouter>
+      <Routes>
+      <Route path="/" element={<PrivateRoute component={Homepage} />} >
+        <Route path="/resume-maker" element ={<PrivateRoute component = {LandingPage} />} />
+        <Route path="/resume-maker-add-template" element={<Template/>}/>
+        {/* <Route path="/resume-maker/add-template" element ={<PrivateRoute component ={Template} />} /> */}
+        <Route path="/resume-maker/resume" element ={<PrivateRoute component ={AddResume}/>} />
+        
+      
+      </Route>
+      <Route path="/login" element={<Login />} />
+      </Routes>
+      </BrowserRouter>
+      
     </div>
   );
 }
